@@ -50,13 +50,21 @@ def get_face_landmarks(image, draw=False):
         ys = [landmark.y for landmark in landmarks]
         zs = [landmark.z for landmark in landmarks]
 
-        min_x = min(xs)
-        min_y = min(ys)
-        min_z = min(zs)
+        # we use nose as a reference to not have dimension problems
+        nose = landmarks[164]
+
+        nose_x = nose.x
+        nose_y = nose.y
+        nose_z = nose.z
 
         for x, y, z in zip(xs, ys, zs):
-            image_landmarks.append(x - min_x)
-            image_landmarks.append(y - min_y)
-            image_landmarks.append(z - min_z)
+        
+            x = x - nose_x
+            y = y - nose_y
+            z = z - nose_z
+
+            image_landmarks.append(x)
+            image_landmarks.append(y)
+            image_landmarks.append(z)
 
     return image_landmarks
