@@ -18,6 +18,21 @@ face_landmarker = vision.FaceLandmarker.create_from_options(options)
 
 def get_face_landmarks(image, draw=False):
 
+    if image is None or image.size == 0:
+        return []
+
+    height, width = image.shape[:2]
+
+    # scale up image
+    min_side = min(height, width)
+
+    if min_side < 512:
+        scale = 512 / min_side
+
+        image = cv2.resize(
+            image, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC
+        )
+
     # OpenCV BGR -> RGB
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
