@@ -221,5 +221,6 @@ __marimo__/
 
 day5/clf-data/
 day6/data/
-day7/fane_data/
+day7/data/
 day7/face_landmarker.task
+day7/data.txt
